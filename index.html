@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação SHC - FMP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+Show quoted text
+        p, li { font-size: 18px; color: var(--text-dim); line-height: 1.5; }
+
+        strong { color: var(--text-main); }
+
+        /* Componentes */
+        .tile {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+
+        /* Slide 1 - Capa Específico */
+        .capa-info {
+            margin-top: 40px;
+            background: rgba(255,255,255,0.03);
+            padding: 40px;
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-align: left;
+        }
+
+        /* Controles */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background: var(--accent); color: black; }
+
+        .slide-number {
+            position: absolute;
+            bottom: 35px;
+            left: 40px;
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        /* Listas sem marcador padrão */
+        .list-clean { list-style: none; display: flex; flex-direction:
+column; gap: 15px; }
+
+        /* Botão de Demonstração */
+        .btn-demo {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: var(--accent);
+            color: #020617;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-demo:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+
+        }
+    </style>
+</head>
+<body>
+
+<div id="presentation-container">
+    <div class="glow" style="top: -10%; right: -5%;"></div>
+    <div class="glow" style="bottom: -10%; left: -5%;"></div>
+
+    <div class="slide active" id="slide-1">
+        <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
+            <h1>SHC</h1>
+            <p style="font-size: 28px; color: var(--text-main);
+margin-bottom: 40px; font-weight: 600;">Sistema de Horas
+
+Complementares</p>
+            <p style="max-width: 800px; margin: 0 auto 40px;
+font-size: 20px;">Automatização do processo de gerenciamento de horas
+
+complementares da FMP</p>
+
+            <div class="capa-info">
+                <div>
+                    <h3><i class="fa-solid fa-users"></i> Membros</h3>
+                    <p style="font-size: 18px;">• Leonardo de Oliveira</p>
+                    <p style="font-size: 18px;">• Maria Eduarda Schmidt</p>
+                    <p style="font-size: 15px; margin-top: 15px;
+opacity: 0.8;">ADS | Faculdade Municipal de Palhoça</p>
+
+                </div>
+                <div style="border-left: 1px solid
+rgba(255,255,255,0.1); padding-left: 40px;">
+                    <h3><i class="fa-solid fa-chalkboard-user"></i>
+Orientação</h3>
+                    <p style="font-size: 18px;">Profª Daniela Amorim</p>
+                    <p style="font-size: 18px;">Profª Msc. Simone
+
+Regina da Silva</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+        <h2>Contexto e Visão do Produto</h2>
+
+        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+            <div class="tile">
+                <h3>Desafios do Cenário Atual</h3>
+                <p style="margin-bottom: 15px; font-size: 16px;">O
+modelo de transição física cumpre o seu papel, mas apresenta
+vulnerabilidades operacionais inerentes ao formato:</p>
+                <ul class="list-clean">
+                    <li><i class="fa-solid fa-folder-open"
+style="color: var(--accent); width: 25px;"></i>
+<strong>Rastreabilidade:</strong> Dificuldade natural em localizar ou
+auditar históricos físicos rapidamente.</li>
+                    <li><i class="fa-solid fa-hourglass-half"
+style="color: var(--accent); width: 25px;"></i> <strong>Tempo de
+Resposta:</strong> O trâmite em papel prolonga o tempo letivo de
+devolutiva ao aluno.</li>
+                    <li><i class="fa-solid fa-users-gear"
+style="color: var(--accent); width: 25px;"></i> <strong>Demanda
+Operacional:</strong> Elevada alocação da equipe administrativa em
+tarefas de compilação.</li>
+                </ul>
+
+            </div>
+            <div class="tile">
+                <h3>Visão do Produto</h3>
+                <p style="margin-bottom: 15px;">
+                    O <strong>SHC</strong> atua como um facilitador
+que centraliza o controlo institucional e adiciona <strong>autonomia e
+agilidade</strong> ao processo.
+                </p>
+                <ul class="list-clean" style="gap: 10px;">
+                    <li><i class="fa-solid fa-leaf" style="color:
+var(--accent); width: 20px;"></i> <strong>Sustentabilidade:</strong>
+Forte redução da dependência de papel.</li>
+
+                    <li><i class="fa-solid fa-gauge-high"
+style="color: var(--accent); width: 20px;"></i>
+<strong>Eficiência:</strong> Acompanhamento do progresso em tempo
+real.</li>
+                    <li><i class="fa-solid fa-shield-halved"
+style="color: var(--accent); width: 20px;"></i>
+<strong>Segurança:</strong> Integridade e rastreabilidade dos
+registos.</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-3">
+        <h2>Objetivos</h2>
+        <div class="tile" style="text-align: center;">
+            <h3>Objetivo Geral</h3>
+            <p style="font-size: 24px; color: white;">Automatizar o
+processo de gerenciamento de horas complementares em instituições de
+nível superior.</p>
+
+        </div>
+        <div class="tile">
+            <h3>Objetivos Específicos</h3>
+            <ul style="display: grid; grid-template-columns: 1fr 1fr;
+gap: 15px; list-style: none;">
+
+                <li><i class="fa-solid fa-check" style="color:
+var(--accent); margin-right: 8px;"></i> Levantar requisitos do fluxo
+atual</li>
+
+                <li><i class="fa-solid fa-check" style="color:
+var(--accent); margin-right: 8px;"></i> Eliminar formulários físicos e
+planilhas</li>
+
+                <li><i class="fa-solid fa-check" style="color:
+var(--accent); margin-right: 8px;"></i> Permitir o cadastro digital de
+
+certificados</li>
+                <li><i class="fa-solid fa-check" style="color:
+var(--accent); margin-right: 8px;"></i> Disponibilizar painéis para
+
+coordenadores</li>
+                <li><i class="fa-solid fa-check" style="color:
+var(--accent); margin-right: 8px;"></i> Garantir consulta de histórico
+e status</li>
+
+                <li><i class="fa-solid fa-check" style="color:
+var(--accent); margin-right: 8px;"></i> Oferecer uma interface
+intuitiva (UX)</li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-4">
+        <h2>Fundamentação e Contextualização</h2>
+
+        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+            <div class="tile" style="display: flex; flex-direction:
+column; justify-content: center;">
+                <h3 style="font-size: 20px;">Por que automatizar?</h3>
+                <ul class="list-clean">
+                    <li><i class="fa-solid fa-globe" style="color:
+var(--accent); width: 25px;"></i> <strong>Sistemas Web:</strong>
+Essenciais na modernização acadêmica.</li>
+                    <li><i class="fa-solid fa-arrow-trend-down"
+style="color: var(--accent); width: 25px;"></i> <strong>Redução de
+Riscos:</strong> Proteção contra perda ou extravio de dados.</li>
+                    <li><i class="fa-solid fa-lock" style="color:
+var(--accent); width: 25px;"></i> <strong>Confiabilidade:</strong>
+Fluxos ágeis, rastreáveis e seguros.</li>
+                </ul>
+            </div>
+            <div class="tile">
+                <h3>O SHC é fundamentado em:</h3>
+                <div class="list-clean" style="margin-top: 25px; gap: 25px;">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fa-solid fa-microchip"
+style="font-size: 30px; color: var(--accent); width: 40px; text-align:
+center;"></i>
+                        <p style="margin: 0; font-weight: 600; color:
+white;">Gestão automatizada de atividades</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+
+                        <i class="fa-solid fa-cloud" style="font-size:
+30px; color: var(--accent); width: 40px; text-align: center;"></i>
+                        <p style="margin: 0; font-weight: 600; color:
+white;">Sistemas web centralizadores</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fa-solid fa-user-gear"
+style="font-size: 30px; color: var(--accent); width: 40px; text-align:
+center;"></i>
+                        <p style="margin: 0; font-weight: 600; color:
+white;">Usabilidade e Experiência do Usuário (UX)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="slide" id="slide-5">
+        <h2>Metodologia e Fluxo de Atividades</h2>
+
+        <div class="grid-2" style="align-items: center; margin-top:
+auto; margin-bottom: auto; height: 100%;">
+            <div class="tile">
+                <p style="margin-bottom: 20px;">Pesquisa
+
+<strong>aplicada</strong>, <strong>qualitativa</strong> e
+<strong>exploratória</strong>.</p>
+                <h3>Resumo do Fluxo</h3>
+                <ul class="list-clean" style="font-size: 16px;">
+                    <li><strong style="color: var(--accent);">1.
+Análise:</strong> Entrevistas e estudo de formulários manuais.</li>
+                    <li><strong style="color: var(--accent);">2.
+Requisitos:</strong> Levantamento das regras de negócio (RF/RNF).</li>
+                    <li><strong style="color: var(--accent);">3.
+Design:</strong> Modelagem UML e prototipação de interfaces.</li>
+                    <li><strong style="color: var(--accent);">4.
+Desenvolvimento:</strong> Construção incremental do código.</li>
+                    <li><strong style="color: var(--accent);">5.
+Validação:</strong> Testes contínuos para garantir a usabilidade.</li>
+                </ul>
+
+            </div>
+            <div style="text-align: center; display: flex;
+justify-content: center; align-items: center;">
+                <img src="fluxo.png" alt="Fluxo da Metodologia"
+style="max-height: 460px; border-radius: 16px; box-shadow: 0 15px 35px
+rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-6">
+        <h2>Desenvolvimento e Arquitetura</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 30px;
+height: 100%; justify-content: center;">
+
+
+            <div style="text-align: center; display: flex;
+justify-content: center; align-items: center; background: white;
+border-radius: 20px; padding: 20px; height: 320px; box-shadow: 0 15px
+30px rgba(0,0,0,0.5);">
+                <img src="arquitetura.png" alt="Arquitetura do
+Sistema" style="max-width: 100%; max-height: 100%; object-fit:
+contain;">
+            </div>
+
+            <div style="display: grid; grid-template-columns:
+repeat(4, 1fr); gap: 15px;">
+                <div class="tile" style="margin-bottom: 0; padding:
+20px; text-align: center;">
+                    <i class="fa-brands fa-laravel" style="color:
+var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
+                    <p style="font-size:
+16px;"><strong>Backend</strong><br>PHP / Laravel</p>
+                </div>
+
+                <div class="tile" style="margin-bottom: 0; padding:
+20px; text-align: center;">
+                    <i class="fa-brands fa-html5" style="color:
+var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
+                    <p style="font-size:
+16px;"><strong>Frontend</strong><br>HTML, CSS, JS</p>
+                </div>
+
+                <div class="tile" style="margin-bottom: 0; padding:
+20px; text-align: center;">
+                    <i class="fa-solid fa-database" style="color:
+var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
+                    <p style="font-size: 16px;"><strong>Banco de
+Dados</strong><br>PostgreSQL</p>
+                </div>
+
+                <div class="tile" style="margin-bottom: 0; padding:
+20px; text-align: center;">
+                    <i class="fa-solid fa-code-branch" style="color:
+var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
+                    <p style="font-size:
+16px;"><strong>Modelagem</strong><br>GitHub e UML</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="slide" id="slide-7">
+        <h2>Gestão do Produto e Impacto</h2>
+
+        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+            <div class="tile">
+                <h3>Empreendedorismo e ESG</h3>
+                <ul class="list-clean" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-earth-americas"
+style="color: var(--accent); width: 25px;"></i> Solução alinhada às
+<strong>ODS 4, 9 e 12</strong>.</li>
+                    <li><i class="fa-solid fa-arrow-trend-up"
+style="color: var(--accent); width: 25px;"></i> Arquitetura de produto
+<strong>escalável</strong>.</li>
+                    <li><i class="fa-solid fa-file-invoice-dollar"
+style="color: var(--accent); width: 25px;"></i> Licenciamento
+<strong>anual ou aquisição</strong>.</li>
+                    <li><i class="fa-solid fa-chart-line"
+style="color: var(--accent); width: 25px;"></i> Foco na otimização de
+custos e tempo letivo.</li>
+                </ul>
+            </div>
+            <div class="tile">
+                <h3>Métricas de Sucesso (OKRs)</h3>
+                <p style="margin-bottom: 15px; font-size: 16px;">Foco
+na eficiência operacional e na experiência do usuário final:</p>
+                <ul class="list-clean" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-stopwatch" style="color:
+var(--accent); width: 25px;"></i> <strong>Agilidade:</strong>
+Submissão de certificados em no máximo 3 passos.</li>
+                    <li><i class="fa-solid fa-user-check"
+style="color: var(--accent); width: 25px;"></i>
+<strong>Usabilidade:</strong> Meta de aprovação superior a 90% nos
+testes práticos.</li>
+                    <li><i class="fa-solid fa-boxes-stacked"
+style="color: var(--accent); width: 25px;"></i>
+<strong>Adoção:</strong> Engajamento de 100% dos alunos ativos no novo
+fluxo.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-8">
+        <h2>Considerações Finais e Trabalhos Futuros</h2>
+
+        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+            <div class="tile">
+                <h3>Considerações Finais</h3>
+                <ul class="list-clean" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-check-circle"
+style="color: var(--accent); width: 25px;"></i>
+<strong>Modernização:</strong> Simplifica a tramitação de dados na
+FMP.</li>
+                    <li><i class="fa-solid fa-check-circle"
+style="color: var(--accent); width: 25px;"></i>
+<strong>Transparência:</strong> Informação acessível para alunos e
+gestores.</li>
+                    <li><i class="fa-solid fa-check-circle"
+style="color: var(--accent); width: 25px;"></i>
+<strong>Eficiência:</strong> Adequa-se às necessidades
+institucionais.</li>
+                </ul>
+
+            </div>
+            <div class="tile">
+                <h3>Trabalhos Futuros</h3>
+                <ul class="list-clean" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-link" style="color:
+var(--accent); width: 25px;"></i> Integração direta com o SGA</li>
+                    <li><i class="fa-solid fa-file-pdf" style="color:
+var(--accent); width: 25px;"></i> Geração automática de relatórios
+(PDF)</li>
+                    <li><i class="fa-solid fa-envelope" style="color:
+var(--accent); width: 25px;"></i> Notificações automáticas por
+e-mail</li>
+                    <li><i class="fa-solid fa-building-columns"
+style="color: var(--accent); width: 25px;"></i> Expansão para outras
+
+IES</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 30px; color:
+var(--accent); font-size: 24px; font-weight: bold;">Muito obrigado
+pela atenção!</p>
+    </div>
+
+    <div class="slide-number"><span id="current-idx">1</span> / 8</div>
+Show quoted text
+Em qui., 7 de mai. de 2026 às 10:37, MARIA EDUARDA SCHMIDT
+Show quoted text
