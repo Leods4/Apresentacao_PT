@@ -8,7 +8,85 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
-Show quoted text
+Hide quoted text
+
+rel="stylesheet">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #020617;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #00aaff;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container Principal */
+        #presentation-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: #0f172a;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        /* Background Effects */
+        .glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 170, 255, 0.1)
+0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Slides */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 60px 80px;
+            display: none;
+            flex-direction: column;
+            z-index: 1;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tipografia */
+        h1 { font-family: 'Poppins', sans-serif; font-size: 100px;
+color: var(--accent); line-height: 1; }
+        h2 { font-family: 'Poppins', sans-serif; font-size: 38px;
+margin-bottom: 30px; border-left: 10px solid var(--accent);
+padding-left: 20px; text-transform: uppercase; }
+        h3 { color: var(--accent); font-size: 24px; margin-bottom: 15px; }
         p, li { font-size: 18px; color: var(--text-dim); line-height: 1.5; }
 
         strong { color: var(--text-main); }
@@ -451,6 +529,458 @@ pela atenção!</p>
     </div>
 
     <div class="slide-number"><span id="current-idx">1</span> / 8</div>
-Show quoted text
+Hide quoted text
+
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()"><i class="fa-solid
+fa-chevron-left"></i></button>
+        <button class="btn" onclick="nextSlide()"><i class="fa-solid
+fa-chevron-right"></i></button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        slides[index].classList.add('active');
+        document.getElementById('current-idx').innerText = index + 1;
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+</script>
+
+</body>
+</html>
+
 Em qui., 7 de mai. de 2026 às 10:37, MARIA EDUARDA SCHMIDT
-Show quoted text
+Hide quoted text
+
+<maria.es06@aluno.fmpsc.edu.br> escreveu:
+>
+> Em qui., 7 de mai. de 2026 às 10:36, MARIA EDUARDA SCHMIDT
+> <maria.es06@aluno.fmpsc.edu.br> escreveu:
+> >
+> > <!DOCTYPE html>
+> > <html lang="pt-br">
+> > <head>
+> >     <meta charset="UTF-8">
+> >     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> >     <title>Apresentação SHC</title>
+> >     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap"
+> > rel="stylesheet">
+> >     <link rel="stylesheet"
+> > href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+> >     <style>
+> >         :root {
+> >             --bg: #020617;
+> >             --card-bg: rgba(30, 41, 59, 0.7);
+> >             --accent: #00aaff;
+> >             --text-main: #f8fafc;
+> >             --text-dim: #94a3b8;
+> >         }
+> >
+> >         * { margin: 0; padding: 0; box-sizing: border-box; }
+> >
+> >         body {
+> >             background-color: var(--bg);
+> >             color: var(--text-main);
+> >             font-family: 'Inter', sans-serif;
+> >             overflow: hidden;
+> >             height: 100vh;
+> >             display: flex;
+> >             justify-content: center;
+> >             align-items: center;
+> >         }
+> >
+> >         /* Container Principal */
+> >         #presentation-container {
+> >             width: 1280px;
+> >             height: 720px;
+> >             position: relative;
+> >             background-color: #0f172a;
+> >             border-radius: 16px;
+> >             border: 1px solid rgba(255, 255, 255, 0.05);
+> >             box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+> >             overflow: hidden;
+> >         }
+> >
+> >         /* Background Effects */
+> >         .glow {
+> >             position: absolute;
+> >             width: 500px;
+> >             height: 500px;
+> >             border-radius: 50%;
+> >             background: radial-gradient(circle, rgba(0, 170, 255, 0.1)
+> > 0%, transparent 70%);
+> >             z-index: 0;
+> >             pointer-events: none;
+> >         }
+> >
+> >         /* Slides */
+> >         .slide {
+> >             position: absolute;
+> >             top: 0;
+> >             left: 0;
+> >             width: 100%;
+> >             height: 100%;
+> >             padding: 60px 80px;
+> >             display: none;
+> >             flex-direction: column;
+> >             z-index: 1;
+> >             animation: fadeIn 0.5s ease-in-out;
+> >         }
+> >
+> >         .slide.active { display: flex; }
+> >
+> >         @keyframes fadeIn {
+> >             from { opacity: 0; transform: translateY(10px); }
+> >             to { opacity: 1; transform: translateY(0); }
+> >         }
+> >
+> >         /* Tipografia */
+> >         h1 { font-family: 'Poppins', sans-serif; font-size: 100px;
+> > color: var(--accent); line-height: 1; }
+> >         h2 { font-family: 'Poppins', sans-serif; font-size: 38px;
+> > margin-bottom: 30px; border-left: 10px solid var(--accent);
+> > padding-left: 20px; text-transform: uppercase; }
+> >         h3 { color: var(--accent); font-size: 24px; margin-bottom: 15px; }
+> >         p, li { font-size: 20px; color: var(--text-dim); line-height: 1.5; }
+> >         strong { color: var(--text-main); }
+> >
+> >         /* Componentes */
+> >         .tile {
+> >             background: var(--card-bg);
+> >             backdrop-filter: blur(12px);
+> >             border: 1px solid rgba(255, 255, 255, 0.1);
+> >             border-radius: 20px;
+> >             padding: 30px;
+> >             margin-bottom: 20px;
+> >         }
+> >
+> >         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+> >         .grid-3 { display: grid; grid-template-columns: repeat(3,
+> > 1fr); gap: 20px; }
+> >
+> >         /* Slide 1 - Capa Específico */
+> >         .capa-info {
+> >             margin-top: 40px;
+> >             background: rgba(255,255,255,0.03);
+> >             padding: 40px;
+> >             border-radius: 24px;
+> >             display: grid;
+> >             grid-template-columns: 1fr 1fr;
+> >             text-align: left;
+> >         }
+> >
+> >         /* Slide 5 - Metodologia Específico */
+> >         .method-list {
+> >             display: grid;
+> >             grid-template-columns: 1fr 1fr;
+> >             gap: 15px;
+> >         }
+> >         .method-item {
+> >             background: rgba(255,255,255,0.03);
+> >             padding: 15px 20px;
+> >             border-radius: 12px;
+> >             border-left: 4px solid var(--accent);
+> >             display: flex;
+> >             align-items: center;
+> >             gap: 15px;
+> >         }
+> >         .method-item span { font-weight: bold; color: var(--accent); }
+> >
+> >         /* Controles */
+> >         .controls {
+> >             position: absolute;
+> >             bottom: 30px;
+> >             right: 40px;
+> >             display: flex;
+> >             gap: 15px;
+> >             z-index: 10;
+> >         }
+> >
+> >         .btn {
+> >             background: rgba(255,255,255,0.1);
+> >             border: 1px solid rgba(255,255,255,0.2);
+> >             color: white;
+> >             padding: 10px 20px;
+> >             border-radius: 8px;
+> >             cursor: pointer;
+> >             transition: 0.3s;
+> >         }
+> >
+> >         .btn:hover { background: var(--accent); color: black; }
+> >
+> >         .slide-number {
+> >             position: absolute;
+> >             bottom: 35px;
+> >             left: 40px;
+> >             color: var(--text-dim);
+> >             font-size: 14px;
+> >         }
+> >     </style>
+> > </head>
+> > <body>
+> >
+> > <div id="presentation-container">
+> >     <div class="glow" style="top: -10%; right: -5%;"></div>
+> >     <div class="glow" style="bottom: -10%; left: -5%;"></div>
+> >
+> >     <div class="slide active" id="slide-1">
+> >         <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
+> >             <h1>SHC</h1>
+> >             <p style="font-size: 28px; color: var(--text-main);
+> > margin-bottom: 40px;">Sistema de Horas Complementares</p>
+> >             <p style="max-width: 800px; margin: 0 auto
+> > 40px;">Automatização do processo de gerenciamento de horas
+> > complementares da FMP</p>
+> >
+> >             <div class="capa-info">
+> >                 <div>
+> >                     <h3><i class="fa-solid fa-users"></i> Alunos</h3>
+> >                     <p>• Leonardo de Oliveira</p>
+> >                     <p>• Maria Eduarda Schmidt</p>
+> >                     <p style="font-size: 14px; margin-top: 10px;">ADS
+> > | Faculdade Municipal de Palhoça</p>
+> >                 </div>
+> >                 <div style="border-left: 1px solid
+> > rgba(255,255,255,0.1); padding-left: 40px;">
+> >                     <h3><i class="fa-solid fa-chalkboard-user"></i>
+> > Orientação</h3>
+> >                     <p>Profª Daniela Amorim</p>
+> >                     <p>Profª Msc. Simone Regina da Silva</p>
+> >                 </div>
+> >             </div>
+> >         </div>
+> >     </div>
+> >
+> >     <div class="slide" id="slide-2">
+> >         <h2>Justificativa e Visão</h2>
+> >         <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+> >             <div class="tile">
+> >                 <h3>Justificativa</h3>
+> >                 <p style="font-size: 18px;">
+> >                     O fluxo manual atual enfrenta limitações naturais
+> > de tempo e manuseio físico, gerando sobrecarga administrativa.
+> >                 </p>
+> >                 <p style="font-size: 18px; margin-top: 15px;">
+> >                     A modernização digital elimina redundâncias e
+> > garante segurança institucional, permitindo que a equipe foque em
+> > atividades de caráter estratégico e pedagógico.
+> >                 </p>
+> >             </div>
+> >             <div class="tile">
+> >                 <h3>Visão do Produto</h3>
+> >                 <p style="font-size: 18px;">
+> >                     O <strong>SHC</strong> é um ecossistema de
+> > confiança projetado para transformar a gestão de horas em uma
+> > experiência de <strong>autonomia e transparência</strong>. Mais que um
+> > repositório, é uma ferramenta de inovação que centraliza o controle
+> > institucional e simplifica a vida do acadêmico.
+> >                 </p>
+> >                 <ul style="list-style: none; margin-top: 15px;
+> > font-size: 16px; color: var(--accent);">
+> >                     <li><i class="fa-solid fa-leaf"></i>
+> > <strong>Sustentabilidade:</strong> Redução drástica do uso de papel
+> > (ODS 12).</li>
+> >                     <li><i class="fa-solid fa-gauge-high"></i>
+> > <strong>Eficiência:</strong> Acompanhamento em tempo real do status
+> > das horas.</li>
+> >                     <li><i class="fa-solid fa-shield-check"></i>
+> > <strong>Segurança:</strong> Confiabilidade total nos registros e
+> > conformidade com o MEC.</li>
+> >                 </ul>
+> >             </div>
+> >         </div>
+> >     </div>
+> >
+> >     <div class="slide" id="slide-3">
+> >         <h2>Objetivos</h2>
+> >         <div class="tile" style="text-align: center;">
+> >             <h3>Objetivo Geral</h3>
+> >             <p style="font-size: 24px; color: white;">Automatizar o
+> > gerenciamento de horas complementares na FMP.</p>
+> >         </div>
+> >         <div class="tile">
+> >             <h3>Objetivos Específicos</h3>
+> >             <ul style="display: grid; grid-template-columns: 1fr 1fr;
+> > gap: 10px; list-style: none;">
+> >                 <li><i class="fa-solid fa-check" style="color:
+> > var(--accent)"></i> Eliminar formulários físicos</li>
+> >                 <li><i class="fa-solid fa-check" style="color:
+> > var(--accent)"></i> Cadastro digital de certificados</li>
+> >                 <li><i class="fa-solid fa-check" style="color:
+> > var(--accent)"></i> Painéis para coordenadores</li>
+> >                 <li><i class="fa-solid fa-check" style="color:
+> > var(--accent)"></i> Interface intuitiva (UX)</li>
+> >                 <li><i class="fa-solid fa-check" style="color:
+> > var(--accent)"></i> Consulta ao histórico real</li>
+> >                 <li><i class="fa-solid fa-check" style="color:
+> > var(--accent)"></i> Levantamento de requisitos</li>
+> >             </ul>
+> >         </div>
+> >     </div>
+> >
+> >     <div class="slide" id="slide-4">
+> >         <h2>Fundamentação Teórica</h2>
+> >         <div class="tile">
+> >             <p style="margin-bottom: 20px;">Sistemas web são
+> > <strong>essenciais</strong> para a modernização administrativa,
+> > reduzindo retrabalho e aumentando a confiabilidade.</p>
+> >             <div class="grid-3">
+> >                 <div style="text-align: center;">
+> >                     <i class="fa-solid fa-microchip" style="font-size:
+> > 40px; color: var(--accent); margin-bottom: 10px;"></i>
+> >                     <p style="font-size: 16px;">Gestão Automatizada</p>
+> >                 </div>
+> >                 <div style="text-align: center;">
+> >                     <i class="fa-solid fa-cloud" style="font-size:
+> > 40px; color: var(--accent); margin-bottom: 10px;"></i>
+> >                     <p style="font-size: 16px;">Soluções Web</p>
+> >                 </div>
+> >                 <div style="text-align: center;">
+> >                     <i class="fa-solid fa-user-gear" style="font-size:
+> > 40px; color: var(--accent); margin-bottom: 10px;"></i>
+> >                     <p style="font-size: 16px;">UX e Usabilidade</p>
+> >                 </div>
+> >             </div>
+> >         </div>
+> >     </div>
+> >
+> >     <div class="slide" id="slide-5">
+> >         <h2>Metodologia</h2>
+> >         <div class="grid-2" style="align-items: center; margin-top:
+> > auto; margin-bottom: auto; height: 100%;">
+> >             <div class="tile">
+> >                 <p style="margin-bottom: 20px;">A metodologia
+> > baseia-se em uma pesquisa <strong>aplicada</strong>,
+> > <strong>qualitativa</strong> e <strong>exploratória</strong>.</p>
+> >                 <h3>Fluxo de Atividades</h3>
+> >                 <p style="font-size: 18px;">
+> >                     O processo se inicia com a
+> > <strong>análise</strong> do fluxo manual atual, através de entrevistas
+> > com a secretaria e análise documental profunda. Com essas informações,
+> > realiza-se o <strong>levantamento de requisitos</strong> (Funcionais e
+> > Não Funcionais). Em seguida, a etapa de <strong>design e
+> > prototipação</strong> materializa a ideia por meio da modelagem UML e
+> > do desenho das interfaces. Por fim, adota-se o
+> > <strong>desenvolvimento</strong> de forma incremental, permitindo a
+> > constante <strong>validação do produto</strong> para garantir que a
+> > solução atenda a todas as necessidades acadêmicas.
+> >                 </p>
+> >             </div>
+> >
+> >             <div style="text-align: center; display: flex;
+> > justify-content: center; align-items: center;">
+> >                 <img src="fluxo.png" alt="Fluxo da Metodologia"
+> > style="max-height: 450px;">
+> >             </div>
+> >         </div>
+> >     </div>
+> >
+> >     <div class="slide" id="slide-6">
+> >         <h2>Desenvolvimento</h2>
+> >         <div class="grid-3">
+> >             <div class="tile">
+> >                 <h3 style="font-size: 18px;">Arquitetura</h3>
+> >                 <p style="font-size: 14px;">PHP -
+> > Laravel<br>PostgreSQL<br>HTML/CSS/JS<br>GitHub/UML</p>
+> >             </div>
+> >             <div class="tile">
+> >                 <h3 style="font-size: 18px;">Gestão/ODS</h3>
+> >                 <p style="font-size: 14px;">ODS 4, 9 e 12<br>Modelo
+> > SaaS<br>Redução de Custos<br>Escalabilidade</p>
+> >             </div>
+> >             <div class="tile">
+> >                 <h3 style="font-size: 18px;">Sistema</h3>
+> >                 <p style="font-size: 14px;">Cadastro
+> > Digital<br>Validação Digital<br>Gestão Central<br>Status Real-time</p>
+> >             </div>
+> >         </div>
+> >     </div>
+> >
+> >     <div class="slide" id="slide-7">
+> >         <h2>Considerações Finais</h2>
+> >         <div class="grid-2">
+> >             <div class="tile">
+> >                 <p>O SHC moderniza a gestão da FMP, reduzindo a
+> > burocracia e proporcionando <strong>transparência e
+> > segurança</strong>.</p>
+> >             </div>
+> >             <div class="tile">
+> >                 <h3>Trabalhos Futuros</h3>
+> >                 <ul style="list-style: none; font-size: 16px;">
+> >                     <li>• Integração direta com SGA</li>
+> >                     <li>• Relatórios em PDF</li>
+> >                     <li>• Notificações por e-mail</li>
+> >                     <li>• Expansão para outras IES</li>
+> >                 </ul>
+> >             </div>
+> >         </div>
+> >         <p style="text-align: center; margin-top: 40px; color:
+> > var(--accent);">Obrigado pela atenção! Dúvidas?</p>
+> >     </div>
+> >
+> >     <div class="slide-number"><span id="current-idx">1</span> / 7</div>
+> >     <div class="controls">
+> >         <button class="btn" onclick="prevSlide()"><i class="fa-solid
+> > fa-chevron-left"></i></button>
+> >         <button class="btn" onclick="nextSlide()"><i class="fa-solid
+> > fa-chevron-right"></i></button>
+> >     </div>
+> > </div>
+> >
+> > <script>
+> >     let currentSlide = 0;
+> >     const slides = document.querySelectorAll('.slide');
+> >     const totalSlides = slides.length;
+> >
+> >     function showSlide(index) {
+> >         slides.forEach(s => s.classList.remove('active'));
+> >         slides[index].classList.add('active');
+> >         document.getElementById('current-idx').innerText = index + 1;
+> >     }
+> >
+> >     function nextSlide() {
+> >         if (currentSlide < totalSlides - 1) {
+> >             currentSlide++;
+> >             showSlide(currentSlide);
+> >         }
+> >     }
+> >
+> >     function prevSlide() {
+> >         if (currentSlide > 0) {
+> >             currentSlide--;
+> >             showSlide(currentSlide);
+> >         }
+> >     }
+> >
+> >     document.addEventListener('keydown', (e) => {
+> >         if (e.key === 'ArrowRight') nextSlide();
+> >         if (e.key === 'ArrowLeft') prevSlide();
+> >     });
+> > </script>
+> >
+> > </body>
+> > </html>
