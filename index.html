@@ -93,6 +93,17 @@
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 
+        /* Estilo da Logo */
+        .logo-curso {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            height: 70px;
+            width: auto;
+            z-index: 10;
+            object-fit: contain;
+        }
+
         /* Slide 1 - Capa Específico */
         .capa-info {
             margin-top: 40px;
@@ -164,6 +175,8 @@
     <div class="glow" style="bottom: -10%; left: -5%;"></div>
 
     <div class="slide active" id="slide-1">
+        <img src="Logo ADS FMP_1.png" alt="Logo do Curso" class="logo-curso">
+        
         <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
             <h1>SHC</h1>
             <p style="font-size: 28px; color: var(--text-main); margin-bottom: 40px; font-weight: 600;">Sistema de Horas Complementares</p>
@@ -212,21 +225,25 @@
     </div>
 
     <div class="slide" id="slide-3">
-        <h2>Objetivos</h2>
-        <div class="tile" style="text-align: center;">
-            <h3>Objetivo Geral</h3>
-            <p style="font-size: 24px; color: white;">Automatizar o processo de gerenciamento de horas complementares em instituições de nível superior.</p>
-        </div>
-        <div class="tile">
-            <h3>Objetivos Específicos</h3>
-            <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; list-style: none;">
-                <li><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 8px;"></i> Levantar requisitos do fluxo atual</li>
-                <li><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 8px;"></i> Eliminar formulários físicos e planilhas</li>
-                <li><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 8px;"></i> Permitir o cadastro digital de certificados</li>
-                <li><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 8px;"></i> Disponibilizar painéis para coordenadores</li>
-                <li><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 8px;"></i> Garantir consulta de histórico e status</li>
-                <li><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 8px;"></i> Oferecer uma interface intuitiva (UX)</li>
-            </ul>
+        <h2>Objetivos e Stakeholders</h2>
+        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+            <div class="tile">
+                <h3>Objetivos do Sistema</h3>
+                <p style="margin-bottom: 15px;"><strong>Geral:</strong> Automatizar o gerenciamento de horas complementares na FMP.</p>
+                <ul class="list-clean">
+                    <li><i class="fa-solid fa-check" style="color: var(--accent); width: 25px;"></i> <span>Eliminar formulários físicos e planilhas</span></li>
+                    <li><i class="fa-solid fa-check" style="color: var(--accent); width: 25px;"></i> <span>Permitir cadastro digital de certificados</span></li>
+                    <li><i class="fa-solid fa-check" style="color: var(--accent); width: 25px;"></i> <span>Garantir consulta de histórico e status</span></li>
+                </ul>
+            </div>
+            <div class="tile">
+                <h3>Público-Alvo (Stakeholders)</h3>
+                <ul class="list-clean">
+                    <li><i class="fa-solid fa-user-graduate" style="color: var(--accent); width: 25px;"></i> <span><strong>Alunos:</strong> Autonomia para envio e rastreabilidade total.</span></li>
+                    <li><i class="fa-solid fa-user-tie" style="color: var(--accent); width: 25px;"></i> <span><strong>Coordenadores:</strong> Agilidade na validação e painéis de controle.</span></li>
+                    <li><i class="fa-solid fa-building-columns" style="color: var(--accent); width: 25px;"></i> <span><strong>Instituição:</strong> Eficiência operacional e sustentabilidade (ESG).</span></li>
+                </ul>
+            </div>
         </div>
     </div>
 
