@@ -1,422 +1,584 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação SHC - FMP</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Apresentação: SHC - Sistema de Horas Complementares</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 500: '#0ea5e9' },
+                        accent: { 400: '#22d3ee' }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #020617;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --accent: #00aaff;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        html { font-size: 18px; }
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #1e293b, #0f172a);
         }
 
-        /* Container Principal */
-        #presentation-container {
-            width: 1280px;
-            height: 720px;
-            position: relative;
-            background-color: #0f172a;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
-            overflow: hidden;
+        #progress-bar {
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Background Effects */
-        .glow {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 170, 255, 0.1) 0%, transparent 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Slides */
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 60px 80px;
-            display: none;
-            flex-direction: column;
-            z-index: 1;
-            animation: fadeIn 0.5s ease-in-out;
+            width: 90%;
+            max-width: 1050px;
+            height: 78vh;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
         }
 
-        .slide.active { display: flex; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
         }
 
-        /* Tipografia */
-        h1 { font-family: 'Poppins', sans-serif; font-size: 100px; color: var(--accent); line-height: 1; }
-        h2 { font-family: 'Poppins', sans-serif; font-size: 38px; margin-bottom: 30px; border-left: 10px solid var(--accent); padding-left: 20px; text-transform: uppercase; }
-        h3 { color: var(--accent); font-size: 24px; margin-bottom: 15px; }
-        p, li { font-size: 18px; color: var(--text-dim); line-height: 1.5; }
-        strong { color: var(--text-main); }
-
-        /* Componentes */
-        .tile {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 20px;
+        .slide::-webkit-scrollbar {
+            width: 6px;
         }
-
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-
-        /* Estilo da Logo */
-        .logo-curso {
-            position: absolute;
-            top: 40px;
-            left: 50px;
-            height: 70px;
-            width: auto;
-            z-index: 10;
-            object-fit: contain;
+        .slide::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
-
-        /* Slide 1 - Capa Específico */
-        .capa-info {
-            margin-top: 40px;
-            background: rgba(255,255,255,0.03);
-            padding: 40px;
-            border-radius: 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            text-align: left;
-        }
-
-        /* Controles */
-        .controls {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
-            display: flex;
-            gap: 15px;
-            z-index: 10;
-        }
-
-        .btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover { background: var(--accent); color: black; }
-
-        .slide-number {
-            position: absolute;
-            bottom: 35px;
-            left: 40px;
-            color: var(--text-dim);
-            font-size: 14px;
-        }
-
-        /* Listas sem marcador padrão */
-        .list-clean { list-style: none; display: flex; flex-direction: column; gap: 15px; }
-        
-        /* Botão de Demonstração */
-        .btn-demo {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 25px;
-            background: var(--accent);
-            color: #020617;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-        .btn-demo:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
+        .slide::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
         }
     </style>
 </head>
-<body>
+<body class="h-screen w-screen overflow-hidden text-slate-200 relative flex flex-col justify-between select-none">
 
-<div id="presentation-container">
-    <div class="glow" style="top: -10%; right: -5%;"></div>
-    <div class="glow" style="bottom: -10%; left: -5%;"></div>
-
-    <div class="slide active" id="slide-1">
-        <img src="Logo ADS FMP_1.png" alt="Logo do Curso" class="logo-curso">
-        
-        <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
-            <h1>SHC</h1>
-            <p style="font-size: 28px; color: var(--text-main); margin-bottom: 40px; font-weight: 600;">Sistema de Horas Complementares</p>
-            <p style="max-width: 800px; margin: 0 auto 40px; font-size: 20px;">Automatização do processo de gerenciamento de horas complementares da FMP</p>
-            
-            <div class="capa-info">
-                <div>
-                    <h3><i class="fa-solid fa-users"></i> Membros</h3>
-                    <p style="font-size: 18px;">• Leonardo de Oliveira</p>
-                    <p style="font-size: 18px;">• Maria Eduarda Schmidt</p>
-                    <p style="font-size: 15px; margin-top: 15px; opacity: 0.8;">ADS | Faculdade Municipal de Palhoça</p>
-                </div>
-                <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 40px;">
-                    <h3><i class="fa-solid fa-chalkboard-user"></i> Orientação</h3>
-                    <p style="font-size: 18px;">Profª Daniela Amorim</p>
-                    <p style="font-size: 18px;">Profª Msc. Simone Regina da Silva</p>
-                </div>
-            </div>
-        </div>
+    <div class="fixed top-0 left-0 w-full h-1.5 z-50 bg-slate-950">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-accent-400 w-0 shadow-[0_0_12px_rgba(34,211,238,0.6)]"></div>
     </div>
 
-    <div class="slide" id="slide-2">
-        <h2>Contexto e Visão do Produto</h2>
-        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
-            <div class="tile">
-                <h3>Desafios do Cenário Atual</h3>
-                <p style="margin-bottom: 15px; font-size: 16px;">O modelo de transição física cumpre o seu papel, mas apresenta vulnerabilidades operacionais inerentes ao formato:</p>
-                <ul class="list-clean">
-                    <li><i class="fa-solid fa-folder-open" style="color: var(--accent); width: 25px;"></i> <strong>Rastreabilidade:</strong> Dificuldade natural em localizar ou auditar históricos físicos rapidamente.</li>
-                    <li><i class="fa-solid fa-hourglass-half" style="color: var(--accent); width: 25px;"></i> <strong>Tempo de Resposta:</strong> O trâmite em papel prolonga o tempo letivo de devolutiva ao aluno.</li>
-                    <li><i class="fa-solid fa-users-gear" style="color: var(--accent); width: 25px;"></i> <strong>Demanda Operacional:</strong> Elevada alocação da equipe administrativa em tarefas de compilação.</li>
-                </ul>
-            </div>
-            <div class="tile">
-                <h3>Visão do Produto</h3>
-                <p style="margin-bottom: 15px;">
-                    O <strong>SHC</strong> atua como um facilitador que centraliza o controle institucional e adiciona <strong>autonomia e agilidade</strong> ao processo.
+    <div class="flex-grow flex items-center justify-center relative z-10 px-4 mt-4">
+        
+        <div class="slide active bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14 flex flex-col justify-between">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-accent-400 uppercase bg-slate-800/60 px-3 py-1.5 rounded-full border border-slate-700/50">Projeto Técnico II</span>
+                <h1 class="text-3xl md:text-5xl text-white font-bold mt-6 mb-4 leading-tight">
+                    Sistema de Horas Complementares <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400">(SHC)</span>
+                </h1>
+                <p class="text-slate-400 text-lg max-w-3xl italic border-l-2 border-brand-500 pl-4 my-6">
+                    Desenvolvimento de uma solução web para centralização e gestão de atividades complementares no ensino superior.
                 </p>
-                <ul class="list-clean" style="gap: 10px;">
-                    <li><i class="fa-solid fa-leaf" style="color: var(--accent); width: 20px;"></i> <strong>Sustentabilidade:</strong> Forte redução da dependência de papel.</li>
-                    <li><i class="fa-solid fa-gauge-high" style="color: var(--accent); width: 20px;"></i> <strong>Eficiência:</strong> Acompanhamento do progresso em tempo real.</li>
-                    <li><i class="fa-solid fa-shield-halved" style="color: var(--accent); width: 20px;"></i> <strong>Segurança:</strong> Integridade e rastreabilidade dos registos.</li>
-                </ul>
             </div>
-        </div>
-    </div>
-
-    <div class="slide" id="slide-3">
-        <h2>Objetivos e Stakeholders</h2>
-        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
-            <div class="tile">
-                <h3>Objetivos do Sistema</h3>
-                <p style="margin-bottom: 15px;"><strong>Geral:</strong> Automatizar o gerenciamento de horas complementares em IES.</p>
-                <ul class="list-clean">
-                    <li><i class="fa-solid fa-check" style="color: var(--accent); width: 25px;"></i> <span>Eliminar formulários físicos e planilhas</span></li>
-                    <li><i class="fa-solid fa-check" style="color: var(--accent); width: 25px;"></i> <span>Permitir cadastro digital de certificados</span></li>
-                    <li><i class="fa-solid fa-check" style="color: var(--accent); width: 25px;"></i> <span>Garantir consulta de histórico e status</span></li>
-                </ul>
-            </div>
-            <div class="tile">
-                <h3>Público-Alvo (Stakeholders)</h3>
-                <ul class="list-clean">
-                    <li><i class="fa-solid fa-user-graduate" style="color: var(--accent); width: 25px;"></i> <span><strong>Alunos:</strong> Autonomia para envio e rastreabilidade total.</span></li>
-                    <li><i class="fa-solid fa-user-tie" style="color: var(--accent); width: 25px;"></i> <span><strong>Coordenadores:</strong> Agilidade na validação e painéis de controle.</span></li>
-                    <li><i class="fa-solid fa-building-columns" style="color: var(--accent); width: 25px;"></i> <span><strong>Instituição:</strong> Eficiência operacional e sustentabilidade.</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="slide" id="slide-4">
-        <h2>Fundamentação e Contextualização</h2>
-        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
-            <div class="tile" style="display: flex; flex-direction: column; justify-content: center;">
-                <h3 style="font-size: 20px;">Por que automatizar?</h3>
-                <ul class="list-clean">
-                    <li><i class="fa-solid fa-globe" style="color: var(--accent); width: 25px;"></i> <strong>Sistemas Web:</strong> Essenciais na modernização acadêmica.</li>
-                    <li><i class="fa-solid fa-arrow-trend-down" style="color: var(--accent); width: 25px;"></i> <strong>Redução de Riscos:</strong> Proteção contra perda ou extravio de dados.</li>
-                    <li><i class="fa-solid fa-lock" style="color: var(--accent); width: 25px;"></i> <strong>Confiabilidade:</strong> Fluxos ágeis, rastreáveis e seguros.</li>
-                </ul>
-            </div>
-            <div class="tile">
-                <h3>O SHC é fundamentado em:</h3>
-                <div class="list-clean" style="margin-top: 25px; gap: 25px;">
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fa-solid fa-microchip" style="font-size: 30px; color: var(--accent); width: 40px; text-align: center;"></i>
-                        <p style="margin: 0; font-weight: 600; color: white;">Gestão automatizada de atividades</p>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fa-solid fa-cloud" style="font-size: 30px; color: var(--accent); width: 40px; text-align: center;"></i>
-                        <p style="margin: 0; font-weight: 600; color: white;">Sistemas web centralizadores</p>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fa-solid fa-user-gear" style="font-size: 30px; color: var(--accent); width: 40px; text-align: center;"></i>
-                        <p style="margin: 0; font-weight: 600; color: white;">Usabilidade e Experiência do Usuário (UX)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="slide" id="slide-5">
-        <h2>Metodologia e Fluxo de Atividades</h2>
-        <div class="grid-2" style="align-items: center; margin-top: auto; margin-bottom: auto; height: 100%;">
-            <div class="tile">
-                <p style="margin-bottom: 20px;">Pesquisa <strong>aplicada</strong>, <strong>qualitativa</strong> e <strong>exploratória</strong>.</p>
-                <h3>Resumo do Fluxo</h3>
-                <ul class="list-clean" style="font-size: 16px;">
-                    <li><strong style="color: var(--accent);">1. Análise:</strong> Entrevistas e estudo de formulários manuais.</li>
-                    <li><strong style="color: var(--accent);">2. Requisitos:</strong> Levantamento das regras de negócio (RF/RNF).</li>
-                    <li><strong style="color: var(--accent);">3. Design:</strong> Modelagem UML e prototipação de interfaces.</li>
-                    <li><strong style="color: var(--accent);">4. Desenvolvimento:</strong> Construção incremental do código.</li>
-                    <li><strong style="color: var(--accent);">5. Validação:</strong> Testes contínuos para garantir a usabilidade.</li>
-                </ul>
-            </div>
-            <div style="text-align: center; display: flex; justify-content: center; align-items: center;">
-                <img src="fluxo.png" alt="Fluxo da Metodologia" style="max-height: 460px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
-            </div>
-        </div>
-    </div>
-
-    <div class="slide" id="slide-6">
-        <h2>Desenvolvimento e Arquitetura</h2>
-        
-        <div style="display: flex; flex-direction: column; gap: 30px; height: 100%; justify-content: center;">
             
-            <div style="text-align: center; display: flex; justify-content: center; align-items: center; background: white; border-radius: 20px; padding: 20px; height: 320px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);">
-                <img src="arquitetura.png" alt="Arquitetura do Sistema" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
+                <div class="text-sm text-slate-400 space-y-1">
+                    <p><strong class="text-slate-200">Autores:</strong> Leonardo de Oliveira e Maria Eduarda Schmidt</p>
+                    <p><strong class="text-slate-200">Orientadoras:</strong> Profª Msc. Simone Regina da Silva e Profª Daniela Amorim</p>
+                </div>
+                <div class="text-sm md:text-right text-slate-400 self-end">
+                    <p class="font-semibold text-brand-500">Faculdade Municipal de Palhoça (FMP)</p>
+                    <p>Análise e Desenvolvimento de Sistemas</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-8 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> O Problema e o Desafio Institucional
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-800/40 p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 font-bold mb-4">01</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Processo Manual</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Uso de formulários físicos e entrega presencial de documentos, gerando manipulação sucessiva dos mesmos dados em diferentes etapas.</p>
+                </div>
+
+                <div class="bg-slate-800/40 p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400 font-bold mb-4">02</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Descentralização</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Necessidade de transcrição manual de dados para planilhas e sistemas institucionais, elevando o risco de inconsistências e extravios.</p>
+                </div>
+
+                <div class="bg-slate-800/40 p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">03</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Falta de Transparência</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Dificuldade para os alunos acompanharem o status de suas solicitações e falta de clareza no fluxo de validação.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-4 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Objetivos do Projeto (SHC)
+            </h2>
+            <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                <strong class="text-white">Objetivo Geral:</strong> Desenvolver um sistema web para centralização, organização e apoio à gestão das atividades complementares, visando a digitalização, rastreabilidade e modernização dos processos acadêmicos.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-brand-500 font-bold mt-0.5">✔</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Digitalização de Formulários</h4>
+                            <p class="text-xs text-slate-400 mt-1">Permitir cadastro e submissão com upload de comprovantes digitais (PDF).</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-brand-500 font-bold mt-0.5">✔</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Rastreabilidade e Histórico</h4>
+                            <p class="text-xs text-slate-400 mt-1">Implementar recursos para consulta e acompanhamento de status em tempo real.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-brand-500 font-bold mt-0.5">✔</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Fluxos de Validação</h4>
+                            <p class="text-xs text-slate-400 mt-1">Criar mecanismos de análise para aprovação, ressalvas e reprovação.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-brand-500 font-bold mt-0.5">✔</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">UX e Perfis de Acesso</h4>
+                            <p class="text-xs text-slate-400 mt-1">Adequar interfaces e permissões aos diferentes atores envolvidos no fluxo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-4 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Metodologia da Pesquisa
+            </h2>
+            <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                Pesquisa <strong>aplicada, exploratória e descritiva</strong>, com abordagem <strong>qualitativa</strong>. O objetivo foi a imersão profunda na realidade institucional para compreensão do processo e concepção da solução computacional.
+            </p>
+            
+            <div class="flex flex-col gap-4">
+                <div class="flex items-start gap-4 p-5 bg-slate-800/30 rounded-xl border border-slate-800">
+                    <div class="w-12 h-12 shrink-0 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 border border-brand-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-semibold text-white mb-1">1. Entrevistas Não Estruturadas</h4>
+                        <p class="text-sm text-slate-400">Realizadas com representantes dos setores envolvidos para identificar necessidades, regras institucionais e principais desafios enfrentados na execução das atividades.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-5 bg-slate-800/30 rounded-xl border border-slate-800">
+                    <div class="w-12 h-12 shrink-0 rounded-full bg-accent-400/20 flex items-center justify-center text-accent-400 border border-accent-400/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-semibold text-white mb-1">2. Análise Documental</h4>
+                        <p class="text-sm text-slate-400">Estudo de regulamentos institucionais (ex: Resolução nº 004/2024 da FMP), formulários físicos e critérios de validação para embasar a regra de negócio do software.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-5 bg-slate-800/30 rounded-xl border border-slate-800">
+                    <div class="w-12 h-12 shrink-0 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-semibold text-white mb-1">3. Observação do Processo Atual</h4>
+                        <p class="text-sm text-slate-400">Acompanhamento in loco das etapas do fluxo institucional para mapear dificuldades operacionais, gargalos e pontos de retrabalho administrativo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl md:text-3xl text-white font-bold mb-6 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Modelagem: Perfis de Usuário
+                </h2>
+                <p class="text-slate-400 text-sm mb-6">A arquitetura e os casos de uso do SHC foram divididos para atender as responsabilidades específicas de quatro atores principais:</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent"></div>
+                    <h3 class="text-brand-500 font-bold text-lg mb-2">Aluno</h3>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• Cadastro de atividades</li>
+                        <li>• Envio de certificados</li>
+                        <li>• Acompanhar status/histórico</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-400 to-transparent"></div>
+                    <h3 class="text-accent-400 font-bold text-lg mb-2">Coordenador</h3>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• Avaliação e validação</li>
+                        <li>• Adicionar ressalvas/feedback</li>
+                        <li>• Consulta do histórico do curso</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent"></div>
+                    <h3 class="text-emerald-400 font-bold text-lg mb-2">Sec. Acadêmica</h3>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• Histórico geral</li>
+                        <li>• Gerenciamento de alunos</li>
+                        <li>• Acompanhamento administrativo</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent"></div>
+                    <h3 class="text-rose-400 font-bold text-lg mb-2">Administrador</h3>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• Gerenciar configurações globais</li>
+                        <li>• Criar categorias/cursos</li>
+                        <li>• Gerenciamento de acessos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-8 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Engenharia e Modelagem
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="bg-slate-950/40 p-5 rounded-xl border border-slate-800">
+                        <h3 class="text-brand-500 font-bold text-sm uppercase tracking-wider mb-3">Requisitos Funcionais</h3>
+                        <ul class="text-sm text-slate-400 space-y-2 ml-4 list-disc marker:text-slate-600">
+                            <li>Autenticação segura de usuários.</li>
+                            <li>Submissão de atividades e anexação de documentos.</li>
+                            <li>Validação e análise de solicitações pelos coordenadores.</li>
+                            <li>Acompanhamento do histórico de registros.</li>
+                            <li>Gerenciamento administrativo das informações.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-950/40 p-5 rounded-xl border border-slate-800">
+                        <h3 class="text-accent-400 font-bold text-sm uppercase tracking-wider mb-3">Requisitos Não Funcionais</h3>
+                        <ul class="text-sm text-slate-400 space-y-2 ml-4 list-disc marker:text-slate-600">
+                            <li>Aplicação de princípios de usabilidade e UX.</li>
+                            <li>Segurança da informação e permissões em níveis.</li>
+                            <li>Compatibilidade universal com ambientes web modernos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <div class="p-6 bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 h-full flex flex-col justify-center">
+                        <h3 class="text-lg font-semibold text-white mb-2">Modelagem de Sistema</h3>
+                        <p class="text-sm text-slate-400 mb-4">Utilização de padrões para estruturação do software antes da codificação:</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2 py-1 bg-brand-500/20 text-brand-400 text-xs font-bold rounded">UML</span>
+                                <p class="text-xs text-slate-300">Diagramas de Casos de Uso e de Classe para descrever atores, funcionalidades e estrutura lógica.</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded">MER/DER</span>
+                                <p class="text-xs text-slate-300">Modelagem Entidade-Relacionamento para projetar a estrutura do banco de dados e integridade dos dados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-8 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Tecnologias e Arquitetura
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-slate-950/40 border border-slate-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        Stack de Desenvolvimento
+                    </h3>
+                    <div class="space-y-4 font-mono text-xs">
+                        <div class="p-3.5 bg-slate-900 rounded-lg border border-slate-800/80">
+                            <p class="text-accent-400 font-bold mb-1">Front-end / Prototipação</p>
+                            <p class="text-slate-300">HTML, CSS, JS puros focados em usabilidade e design responsivo.</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-900 rounded-lg border border-slate-800/80">
+                            <p class="text-brand-500 font-bold mb-1">Back-end</p>
+                            <p class="text-slate-300">PHP estruturado sobre o framework <strong>Laravel</strong>. Autenticação leve garantida pelo <strong>Laravel Sanctum</strong>.</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-900 rounded-lg border border-slate-800/80">
+                            <p class="text-emerald-400 font-bold mb-1">Banco de Dados & Ferramentas</p>
+                            <p class="text-slate-300"><strong>PostgreSQL</strong> (Relacional). Editor de código-fonte <strong>VS Code</strong> e controle de versão via <strong>GitHub</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center space-y-4">
+                    <div class="p-4 bg-slate-800/30 rounded-xl border border-slate-800">
+                        <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-2">Arquitetura MVC</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">Adoção do padrão Model-View-Controller no back-end isolando a lógica de negócio (validações, regras de carga horária) da camada de dados e de apresentação.</p>
+                    </div>
+                    <div class="p-4 bg-slate-800/30 rounded-xl border border-slate-800">
+                        <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-2">Segurança e Integração</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">Upload seguro apenas de formatos autorizados (PDF até 10MB) e estrutura preparada para integração via API com Sistemas Acadêmicos Externos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-8 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Impacto: Análise Comparativa do Processo
+            </h2>
+            
+            <div class="overflow-hidden border border-slate-800 rounded-xl bg-slate-950/40 mt-6">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800/70 text-slate-300 text-xs tracking-wider uppercase font-semibold">
+                            <th class="p-4 border-b border-slate-800">Critério</th>
+                            <th class="p-4 border-b border-slate-800 text-rose-300">Processo Manual (Antes)</th>
+                            <th class="p-4 border-b border-slate-800 text-emerald-400">Sistema SHC (Depois)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 text-sm divide-y divide-slate-800/60">
+                        <tr class="hover:bg-slate-800/20 transition-colors">
+                            <td class="p-4 font-bold text-slate-400">Cadastro / Envio</td>
+                            <td class="p-4">Preenchimento manual físico / Entrega presencial.</td>
+                            <td class="p-4 font-medium text-emerald-300">Formulário digital / Upload direto no sistema.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/20 transition-colors">
+                            <td class="p-4 font-bold text-slate-400">Retrabalho / Erros</td>
+                            <td class="p-4">Elevado (transcrição de dados) / Alto risco de perda.</td>
+                            <td class="p-4 font-medium text-emerald-300">Reduzido / Registro direto e centralizado com validação.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/20 transition-colors">
+                            <td class="p-4 font-bold text-slate-400">Acompanhamento</td>
+                            <td class="p-4">Limitado e dependente da secretaria.</td>
+                            <td class="p-4 font-medium text-emerald-300">Disponível em tempo real pelo aluno via Dashboard.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/20 transition-colors">
+                            <td class="p-4 font-bold text-slate-400">Tempo de Processamento</td>
+                            <td class="p-4">Lento e dependente de etapas puramente manuais.</td>
+                            <td class="p-4 font-medium text-emerald-300">Fluxo digital integrado, ágil e rastreável.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-6 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Validação Técnica e Usabilidade
+            </h2>
+            <p class="text-slate-400 text-sm mb-8">
+                Foi realizado um <strong>Teste Alfa</strong> baseado em observação de tarefas, validando aspectos funcionais, de navegação e aderência aos requisitos na versão homologada.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="col-span-1 bg-slate-950/60 p-6 rounded-xl border border-slate-800 text-center flex flex-col justify-center">
+                    <span class="text-5xl font-extrabold text-brand-500 block mb-2">5</span>
+                    <span class="text-sm font-semibold text-white uppercase tracking-wider block">Usuários Testadores</span>
+                    <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs text-slate-400">
+                        <span class="px-2 py-1 bg-slate-800 rounded">2 Alunos</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded">1 Coord.</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded">1 Sec.</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded">1 Admin</span>
+                    </div>
+                </div>
+
+                <div class="col-span-2 space-y-4">
+                    <div class="p-5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                        <h4 class="text-sm font-bold text-emerald-400 mb-1 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                            Resultados Positivos
+                        </h4>
+                        <p class="text-sm text-slate-300">Boa aceitação geral; facilidade de navegação; clareza na organização das telas; simplicidade no cadastro de atividades e facilidade no acompanhamento do histórico.</p>
+                    </div>
+
+                    <div class="p-5 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                        <h4 class="text-sm font-bold text-amber-400 mb-1 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" /></svg>
+                            Oportunidades de Melhoria Aplicadas
+                        </h4>
+                        <p class="text-sm text-slate-300">Aprimoramento das mensagens de feedback durante ações; maior clareza visual para indicar cadastros prévios existentes, evitando dúvidas iniciais de interpretação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14">
+            <h2 class="text-2xl md:text-3xl text-white font-bold mb-6 flex items-center gap-3">
+                <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Viabilidade Econômica (Plano de Expansão)
+            </h2>
+            
+            <div class="bg-slate-950/40 border border-slate-800 p-5 rounded-xl mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h3 class="text-base font-semibold text-white">Modelo B2B: Produto Digital Escalonável</h3>
+                    <p class="text-xs text-slate-400 mt-1">Solução criada com capacidade de white-label ou licenciamento modular para IES de pequeno/médio porte.</p>
+                </div>
+                <div class="bg-slate-900 px-4 py-2 rounded-lg border border-slate-700/60 font-mono text-center">
+                    <span class="text-brand-500 font-bold text-lg block">R$ 75.000 /ano</span>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest">Receita Recorrente Est. (10 Clientes)</span>
+                </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
-                <div class="tile" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                    <i class="fa-brands fa-laravel" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
-                    <p style="font-size: 16px;"><strong>Backend</strong><br>PHP / Laravel</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-slate-950/60 to-slate-900/40 p-6 rounded-xl border border-slate-800 flex flex-col items-center justify-center text-center">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Licenciamento Institucional</h4>
+                    <span class="text-3xl font-extrabold text-accent-400 block mb-1">Licença Anual</span>
+                    <span class="text-xl text-white block font-mono">R$ 7.500,00</span>
+                    <p class="text-xs text-slate-500 mt-3">Acesso à plataforma, suporte e atualizações.</p>
                 </div>
+
+                <div class="bg-gradient-to-br from-slate-950/60 to-slate-900/40 p-6 rounded-xl border border-slate-800 flex flex-col items-center justify-center text-center">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Licenciamento Permanente</h4>
+                    <span class="text-3xl font-extrabold text-brand-500 block mb-1">Aquisição Única</span>
+                    <span class="text-xl text-white block font-mono">R$ 50.000,00</span>
+                    <p class="text-xs text-slate-500 mt-3">Direito de uso vitalício pela IES na infra própria.</p>
+                </div>
+            </div>
+            
+            <p class="text-xs text-slate-400 text-center">Além da receita direta, o SHC reduz custos ocultos da IES, como papel, armazenamento e horas de trabalho administrativo manual.</p>
+        </div>
+
+        <div class="slide bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl p-8 md:p-14 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl md:text-3xl text-white font-bold mb-8 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-brand-500 rounded-full"></span> Conclusões e Trabalhos Futuros
+                </h2>
+
+                <div class="space-y-4">
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-brand-500 font-bold mt-0.5">✦</div>
+                        <div>
+                            <h4 class="text-base font-semibold text-white">Validação Realizada com Sucesso</h4>
+                            <p class="text-sm text-slate-400 mt-1">O SHC atendeu aos requisitos definidos, organizando em um único ambiente processos complexos de envio, auditoria e validação.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-brand-500 font-bold mt-0.5">✦</div>
+                        <div>
+                            <h4 class="text-base font-semibold text-white">Aumento da UX e Rastreabilidade</h4>
+                            <p class="text-sm text-slate-400 mt-1">Substituição de planilhas dispersas e documentos de gaveta por um dashboard padronizado e auditável (Logs de Ação).</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 p-4 bg-slate-950/30 rounded-xl border border-slate-800/50">
+                        <div class="text-accent-400 font-bold mt-0.5">✦</div>
+                        <div>
+                            <h4 class="text-base font-semibold text-white">Próximos Passos</h4>
+                            <p class="text-sm text-slate-400 mt-1">Integração nativa com outros sistemas acadêmicos e-MEC / Institucionais (API), envio de notificações via push/email, aplicativo móvel e adequação total das bases à LGPD.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400 tracking-tight">Obrigado!</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="fixed bottom-0 left-0 w-full px-8 py-5 z-40 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <button id="prev-btn" class="px-4 py-2 text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 hover:border-slate-700 transition-all flex items-center gap-1 active:scale-95 disabled:opacity-40 disabled:pointer-events-none">
+                ← Voltar
+            </button>
+            <button id="next-btn" class="px-4 py-2 text-xs font-semibold bg-brand-500 hover:bg-brand-600 text-white rounded-lg transition-all flex items-center gap-1 active:scale-95 disabled:opacity-40 disabled:pointer-events-none shadow-[0_0_10px_rgba(14,165,233,0.3)]">
+                Avançar →
+            </button>
+        </div>
+
+        <div class="font-display font-bold text-slate-600 tracking-wider text-sm">
+            <span id="counter" class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400 text-base"></span> / <span id="total-slides" class="text-slate-400"></span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const progressBar = document.getElementById('progress-bar');
+            const counter = document.getElementById('counter');
+            const totalSlidesElem = document.getElementById('total-slides');
+            const btnPrev = document.getElementById('prev-btn');
+            const btnNext = document.getElementById('next-btn');
+            let currentSlide = 0;
+
+            totalSlidesElem.textContent = slides.length;
+
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                        slide.scrollTop = 0; // Reseta o scroll para o topo ao focar no slide
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
                 
-                <div class="tile" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                    <i class="fa-brands fa-html5" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
-                    <p style="font-size: 16px;"><strong>Frontend</strong><br>HTML, CSS, JS</p>
-                </div>
+                // Atualiza o contador numérico
+                counter.textContent = String(currentSlide + 1).padStart(2, '0');
+                
+                // Atualiza a barra de progresso superior
+                const progress = ((currentSlide + 1) / slides.length) * 100;
+                progressBar.style.width = `${progress}%`;
 
-                <div class="tile" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                    <i class="fa-solid fa-database" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
-                    <p style="font-size: 16px;"><strong>Banco de Dados</strong><br>PostgreSQL</p>
-                </div>
+                // Controle de estado dos botões
+                btnPrev.disabled = currentSlide === 0;
+                btnNext.disabled = currentSlide === slides.length - 1;
+            }
 
-                <div class="tile" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                    <i class="fa-solid fa-code-branch" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"></i>
-                    <p style="font-size: 16px;"><strong>Modelagem</strong><br>GitHub e UML</p>
-                </div>
-            </div>
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    updateSlides();
+                }
+            }
 
-        </div>
-    </div>
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlides();
+                }
+            }
 
-    <div class="slide" id="slide-7">
-        <h2>Gestão do Produto e Impacto</h2>
-        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
-            <div class="tile">
-                <h3>Empreendedorismo e ESG</h3>
-                <ul class="list-clean" style="margin-top: 15px;">
-                    <li><i class="fa-solid fa-earth-americas" style="color: var(--accent); width: 25px;"></i> Solução alinhada às <strong>ODS 4, 9 e 12</strong>.</li>
-                    <li><i class="fa-solid fa-arrow-trend-up" style="color: var(--accent); width: 25px;"></i> Arquitetura de produto <strong>escalável</strong>.</li>
-                    <li><i class="fa-solid fa-file-invoice-dollar" style="color: var(--accent); width: 25px;"></i> Licenciamento <strong>anual ou aquisição</strong>.</li>
-                    <li><i class="fa-solid fa-chart-line" style="color: var(--accent); width: 25px;"></i> Foco na otimização de custos e tempo letivo.</li>
-                </ul>
-            </div>
-            <div class="tile">
-                <h3>Métricas de Sucesso (OKRs)</h3>
-                <p style="margin-bottom: 15px; font-size: 16px;">Foco na eficiência operacional e na experiência do usuário final:</p>
-                <ul class="list-clean" style="margin-top: 15px;">
-                    <li><i class="fa-solid fa-stopwatch" style="color: var(--accent); width: 25px;"></i> <strong>Agilidade:</strong> Submissão de certificados em no máximo 3 passos.</li>
-                    <li><i class="fa-solid fa-user-check" style="color: var(--accent); width: 25px;"></i> <strong>Usabilidade:</strong> Meta de aprovação superior a 90% nos testes práticos.</li>
-                    <li><i class="fa-solid fa-boxes-stacked" style="color: var(--accent); width: 25px;"></i> <strong>Adoção:</strong> Engajamento de 100% dos alunos ativos no novo fluxo.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+            // Eventos de clique nos controles virtuais
+            btnNext.addEventListener('click', nextSlide);
+            btnPrev.addEventListener('click', prevSlide);
 
-    <div class="slide" id="slide-8">
-        <h2>Considerações Finais e Trabalhos Futuros</h2>
-        <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
-            <div class="tile">
-                <h3>Considerações Finais</h3>
-                <ul class="list-clean" style="margin-top: 15px;">
-                    <li><i class="fa-solid fa-check-circle" style="color: var(--accent); width: 25px;"></i> <strong>Modernização:</strong> Simplifica a tramitação de dados.</li>
-                    <li><i class="fa-solid fa-check-circle" style="color: var(--accent); width: 25px;"></i> <strong>Transparência:</strong> Informação acessível para alunos e gestores.</li>
-                    <li><i class="fa-solid fa-check-circle" style="color: var(--accent); width: 25px;"></i> <strong>Eficiência:</strong> Adequa-se às necessidades institucionais.</li>
-                </ul>
-            </div>
-            <div class="tile">
-                <h3>Trabalhos Futuros</h3>
-                <ul class="list-clean" style="margin-top: 15px;">
-                    <li><i class="fa-solid fa-link" style="color: var(--accent); width: 25px;"></i> Integração direta com um SGA</li>
-                    <li><i class="fa-solid fa-file-pdf" style="color: var(--accent); width: 25px;"></i> Geração automática de relatórios (PDF)</li>
-                    <li><i class="fa-solid fa-envelope" style="color: var(--accent); width: 25px;"></i> Notificações automáticas por e-mail</li>
-                    <li><i class="fa-solid fa-building-columns" style="color: var(--accent); width: 25px;"></i> Expansão para outras IES</li>
-                </ul>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 30px; color: var(--accent); font-size: 24px; font-weight: bold;">Muito obrigado pela atenção!</p>
-    </div>
+            // Mapeamento de Teclas Físicas para Apresentação
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevSlide();
+                }
+            });
 
-    <div class="slide-number"><span id="current-idx">1</span> / 8</div>
-    <div class="controls">
-        <button class="btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
-</div>
-
-<script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-
-    function showSlide(index) {
-        slides.forEach(s => s.classList.remove('active'));
-        slides[index].classList.add('active');
-        document.getElementById('current-idx').innerText = index + 1;
-    }
-
-    function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-            showSlide(currentSlide);
-        }
-    }
-
-    function prevSlide() {
-        if (currentSlide > 0) {
-            currentSlide--;
-            showSlide(currentSlide);
-        }
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') nextSlide();
-        if (e.key === 'ArrowLeft') prevSlide();
-    });
-</script>
-
+            // Inicialização da Engine
+            updateSlides();
+        });
+    </script>
 </body>
 </html>
