@@ -99,9 +99,9 @@ body {
 ========================================================= */
 .slide {
     position: absolute;
-    width: 90%;
-    max-width: 1050px;
-    height: 78vh;
+    width: 95%; /* Aumenta a largura em relação às bordas da tela */
+    max-width: 1400px; /* Permite que o painel estique mais em monitores grandes */
+    height: 84vh; /* Aumenta a altura do painel ocupando mais a tela verticalmente */
     opacity: 0;
     visibility: hidden;
     transform: translateY(30px) scale(0.98);
