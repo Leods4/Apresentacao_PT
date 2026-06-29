@@ -129,3 +129,47 @@ body {
     background: #475569;
     border-radius: 10px;
 }
+
+/* =========================================================
+   Ajustes de Alto Contraste (Adicionado)
+========================================================= */
+
+/* Força os textos acinzentados do Tailwind a ficarem mais claros e nítidos */
+.text-slate-400,
+.text-slate-300,
+.text-slate-200 {
+    color: #f8fafc !important; /* text-slate-50 do Tailwind (Quase branco) */
+}
+
+/* Escurece o fundo dos painéis de vidro para destacar mais o texto */
+.glass-panel {
+    background-color: rgba(15, 23, 42, 0.95) !important; /* Menos transparente */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Escurece o fundo das caixas internas de conteúdo */
+.feature-box,
+.list-box,
+.method-box,
+.role-card {
+    background-color: rgba(2, 6, 23, 0.9) !important; 
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Adiciona uma leve sombra em textos corridos e listas para descolar do fundo */
+p, li, td {
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: 400; /* Garante que a fonte não fique fina demais */
+}
+
+/* Aumenta o contraste dos botões de navegação no rodapé */
+#prev-btn, #next-btn {
+    color: #ffffff !important;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+}
+
+/* Torna a numeração do rodapé mais visível */
+#counter, #total-slides {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
