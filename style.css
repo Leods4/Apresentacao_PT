@@ -8,7 +8,7 @@
 }
 
 html {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 body {
@@ -98,9 +98,10 @@ body {
 ========================================================= */
 .slide {
     position: absolute;
-    width: 95%; /* Aumenta a largura em relação às bordas da tela */
-    max-width: 1400px; /* Permite que o painel estique mais em monitores grandes */
-    height: 84vh; /* Aumenta a altura do painel ocupando mais a tela verticalmente */
+    width: 98%; /* Aumentado de 95% para ficar mais próximo das bordas laterais */
+    max-width: 1600px; /* Aumentado de 1400px para expandir mais em telas grandes */
+    top: 12px;
+    height: 90vh; /* Aumentado de 84vh para ocupar mais espaço verticalmente */
     opacity: 0;
     visibility: hidden;
     transform: translateY(30px) scale(0.98);
@@ -124,7 +125,7 @@ body {
 }
 
 /* =========================================================
-   Ajustes de Alto Contraste (Adicionado)
+   Ajustes de Alto Contraste
 ========================================================= */
 
 /* Força os textos acinzentados do Tailwind a ficarem mais claros e nítidos */
@@ -154,7 +155,7 @@ p,
 li,
 td {
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8);
-    font-weight: 400; /* Garante que a fonte não fique fina demais */
+    font-weight: 400;
 }
 
 /* Aumenta o contraste dos botões de navegação no rodapé */
